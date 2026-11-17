@@ -1,0 +1,76 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMARTTOOLS AI — Your ideas. Smarter. Faster.</title>
+<meta name="description" content="Outils IA pour étudiants, créateurs et entrepreneurs : rédaction, business, réseaux sociaux. / AI tools for students, creators and entrepreneurs.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><text y='9' font-size='9'>⚡</text></svg>">
+<style>
+:root{--bg:#07050d;--bg2:#150d2b;--pu:#8b3dff;--pu2:#b78bff;--line:#2c1f4f;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;background:linear-gradient(180deg,var(--bg),var(--bg2));min-height:100vh}
+a{color:var(--pu2)}header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#07050dee;z-index:5;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.15rem;color:#fff;text-decoration:none;letter-spacing:.5px}.logo b{color:var(--pu2)}
+nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}nav a{color:#ddd;text-decoration:none;font-size:.95rem}nav a:hover{color:#fff}
+main{max-width:920px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:clamp(2rem,7vw,3.4rem);line-height:1.1;margin:.3em 0}h2{margin-top:1.6em}
+.btn{background:var(--pu);color:#fff;border:0;border-radius:10px;padding:12px 22px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 0 18px #8b3dff88;transition:box-shadow .2s,transform .1s}
+.btn:hover{box-shadow:0 0 30px #a566ffcc}.btn:active{transform:scale(.97)}.btn:disabled{opacity:.6;cursor:wait}
+.ghost{background:transparent;border:1px solid var(--pu);box-shadow:none}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:#ffffff0a;border:1px solid var(--line);border-radius:14px;padding:18px}.card h3{margin:.2em 0}
+.hero{padding:30px 0 10px}.hero p{max-width:560px;color:#d8d0ee}
+.glow{animation:in .8s ease both}@keyframes in{from{opacity:0;transform:translateY(12px)}}
+label{display:block;margin:12px 0 4px;color:#cfc4ee;font-size:.9rem}
+textarea,select{width:100%;background:#0d0818;color:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit}
+textarea{min-height:130px;resize:vertical}:focus-visible{outline:2px solid var(--pu2);outline-offset:2px}
+.row{display:grid;gap:12px;grid-template-columns:1fr 1fr}@media(max-width:520px){.row{grid-template-columns:1fr}}
+#out{white-space:pre-wrap;margin-top:16px;min-height:0}.badge{font-size:.8rem;border-radius:99px;padding:2px 10px;background:#2c1f4f;display:inline-block;margin-bottom:6px}
+.badge.ai{background:#1d5c3a}.badge.tpl{background:#6b4a00}.price{font-size:2rem;font-weight:800}
+.lang{background:none;border:1px solid var(--line);color:#fff;border-radius:8px;padding:5px 10px;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:18px 16px;text-align:center;color:#a99cc8;font-size:.9rem}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header><a class="logo" href="#/">SMART<b>TOOLS</b> AI</a><nav id="nav"></nav></header>
+<main id="app"></main>
+<footer id="foot"></footer>
+<script>
+let lang=localStorage.getItem('lang')||(navigator.language.slice(0,2)==='fr'?'fr':'en');
+const p=a=>a[lang==='fr'?0:1],$=s=>document.querySelector(s);
+const CONTACT='contact@example.com'; // ← remplacez par votre vraie adresse
+const TOOLS={
+writer:{ic:'✍️',n:'AI Writer',d:['Rédigez, corrigez, reformulez.','Write, fix and rephrase.'],modes:{write:['Rédiger un texte','Write a text'],fix:['Corriger les fautes','Fix mistakes'],rephrase:['Reformuler','Rephrase'],message:['Message professionnel','Professional message'],product:['Description de produit','Product description']},ph:['Collez votre texte ou décrivez le sujet…','Paste your text or describe the topic…']},
+business:{ic:'💼',n:'AI Business',d:['Idées, noms, plan et marketing.','Ideas, names, plan and marketing.'],modes:{ideas:['Idées de business','Business ideas'],name:["Nom d'entreprise",'Company name'],plan:['Petit plan commercial','Mini business plan'],marketing:['Stratégies marketing','Marketing strategies'],analyze:['Analyser mon idée','Analyse my idea']},ph:['Décrivez votre domaine, budget, ville ou idée…','Describe your field, budget, city or idea…']},
+social:{ic:'📱',n:'AI Social',d:['Bios, légendes, posts et slogans.','Bios, captions, posts and slogans.'],modes:{bio:['Bio Instagram','Instagram bio'],caption:['Légendes','Captions'],post:['Publication','Post'],slogan:['Slogans','Slogans'],tiktokfb:['TikTok & Facebook','TikTok & Facebook']},ph:['Parlez de votre activité ou de la publication…','Tell us about your activity or the post…']}};
+const TONES=[['professionnel','professional'],['amical','friendly'],['enthousiaste','enthusiastic'],['formel','formal'],['humoristique','humorous']];
+const LENS=[['court','short'],['moyen','medium'],['long','long']];
+const legal={privacy:[['Politique de confidentialité','Privacy policy'],[['Le texte que vous saisissez est envoyé à notre serveur puis, si une IA est configurée, à son fournisseur pour générer la réponse. Nous ne vendons pas vos données. Aucun paiement n’est collecté dans cette version. Votre langue et votre compteur d’usage sont stockés localement dans votre navigateur. Évitez de saisir des informations sensibles.','The text you enter is sent to our server and, if an AI provider is configured, to that provider to generate the answer. We do not sell your data. No payment is collected in this version. Your language and usage counter are stored locally in your browser. Avoid entering sensitive information.']]],
+terms:[["Conditions d’utilisation",'Terms of use'],[['Le service est fourni « tel quel ». Les textes générés peuvent contenir des erreurs : vérifiez-les avant usage. Vous restez responsable de l’usage du contenu. Il est interdit d’utiliser le service pour du contenu illégal, trompeur ou nuisible. Les limites d’usage peuvent changer.','The service is provided “as is”. Generated text may contain errors: check it before use. You remain responsible for how you use the content. Using the service for illegal, deceptive or harmful content is forbidden. Usage limits may change.']]]};
+function nav(){$('#nav').innerHTML=[['#/tools',['Outils','Tools']],['#/pricing',['Tarifs','Pricing']],['#/about',['À propos','About']],['#/contact',['Contact','Contact']]].map(x=>`<a href="${x[0]}">${p(x[1])}</a>`).join('')+`<button class="lang" id="lg" aria-label="Language">${lang==='fr'?'EN':'FR'}</button>`;
+$('#lg').onclick=()=>{lang=lang==='fr'?'en':'fr';localStorage.setItem('lang',lang);route()};
+$('#foot').innerHTML=`© ${new Date().getFullYear()} SMARTTOOLS AI · <a href="#/privacy">${p(legal.privacy[0])}</a> · <a href="#/terms">${p(legal.terms[0])}</a>`;document.documentElement.lang=lang}
+const cards=()=>Object.entries(TOOLS).map(([k,t])=>`<a class="card" href="#/tool/${k}" style="text-decoration:none;color:#fff"><div style="font-size:1.8rem">${t.ic}</div><h3>${t.n}</h3><p>${p(t.d)}</p></a>`).join('');
+function toolPage(k){const t=TOOLS[k];if(!t)return pageHome();
+return `<h1 class="glow">${t.ic} ${t.n}</h1><p>${p(t.d)}</p><div class="card">
+<label for="mode">${p(['Que voulez-vous faire ?','What do you want to do?'])}</label><select id="mode">${Object.entries(t.modes).map(([m,l])=>`<option value="${m}">${p(l)}</option>`).join('')}</select>
+<label for="inp">${p(['Votre texte / sujet','Your text / topic'])}</label><textarea id="inp" maxlength="2000" placeholder="${p(t.ph)}"></textarea>
+<div class="row"><div><label for="tone">${p(['Ton','Tone'])}</label><select id="tone">${TONES.map(x=>`<option value="${x[1]}">${p(x)}</option>`).join('')}</select></div>
+<div><label for="len">${p(['Longueur','Length'])}</label><select id="len">${LENS.map(x=>`<option value="${x[1]}">${p(x)}</option>`).join('')}</select></div></div>
+<p><button class="btn" id="go">${p(['Générer','Generate'])}</button></p><div id="meta"></div><div id="out" role="status" aria-live="polite"></div></div>`}
+function bindTool(k){const go=$('#go');if(!go)return;go.onclick=async()=>{const input=$('#inp').value.trim(),out=$('#out'),meta=$('#meta');
+if(!input){out.textContent=p(['Saisissez d’abord un texte ou un sujet.','Please enter a text or topic first.']);return}
+go.disabled=true;out.textContent='…';meta.innerHTML='';
+try{const r=await fetch('/api/generate',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:k,mode:$('#mode').value,lang,input,tone:$('#tone').value,length:$('#len').value})});
+const d=await r.json();
+if(r.status===429)out.textContent=p(['Limite gratuite atteinte pour aujourd’hui. Revenez demain ou découvrez Premium (bientôt).','Free limit reached for today. Come back tomorrow or see Premium (coming soon).']);
+else if(!r.ok)out.textContent=p(['Erreur du service. Réessayez dans un instant.','Service error. Please try again shortly.']);
+else{out.textContent=d.text;meta.innerHTML=d.source==='ai'?`<span class="badge ai">${p(['Généré par IA','AI-generated'])}</span>`:`<span class="badge tpl">${p(['Canevas local — pas une IA (aucune API configurée)','Local template — not AI (no API configured)'])}</span>`}
+}catch(e){out.textContent=p(['Connexion impossible. Vérifiez votre réseau.','Cannot connect. Check your network.'])}go.disabled=false}}
+const pageHome=()=>`<section class="hero glow"><h1>Your ideas.<br>Smarter. Faster.</h1><p>${p(['Des outils intelligents pour aider les étudiants, créateurs et entrepreneurs à gagner du temps. Légers, rapides, en français et en anglais.','Smart tools that help students, creators and entrepreneurs save time. Light, fast, in French and English.'])}</p><a class="btn" href="#/tools">${p(['Essayer gratuitement','Try for free'])}</a></section><h2>${p(['Trois outils','Three tools'])}</h2><div class="grid">${cards()}</div>`;
+const pricing=()=>`<h1>${p(['Tarifs','Pricing'])}</h1><div class="grid"><div class="card"><h3>FREE</h3><div class="price">0 $</div><p>${p(['Accès aux 3 outils · quotas quotidiens limités','All 3 tools · limited daily quota'])}</p><a class="btn" href="#/tools">${p(['Commencer','Start'])}</a></div><div class="card" style="border-color:var(--pu)"><h3>PREMIUM</h3><div class="price">${p(['Bientôt','Soon'])}</div><p>${p(['Plus de générations · options avancées · fonctions exclusives à venir','More generations · advanced options · upcoming exclusive features'])}</p><p><small>${p(['Aucun paiement n’est disponible dans cette version.','No payment is available in this version.'])}</small></p><a class="btn ghost" href="#/contact">${p(['Être prévenu','Get notified'])}</a></div></div>`;
+const about=()=>`<h1>${p(['À propos','About'])}</h1><p>${p(['SMARTTOOLS AI aide les étudiants, créateurs de contenu et entrepreneurs, en Afrique et partout dans le monde, à produire plus vite : textes, idées de business et contenus pour les réseaux sociaux. Le site est pensé pour rester léger sur les connexions limitées.','SMARTTOOLS AI helps students, content creators and entrepreneurs, in Africa and worldwide, work faster: texts, business ideas and social content. The site is built to stay light on limited connections.'])}</p>`;
+const contact=()=>`<h1>Contact</h1><p>${p(['Une question, une idée, un problème ? Écrivez-nous :','A question, an idea, a problem? Write to us:'])}</p><p><a class="btn" href="mailto:${CONTACT}?subject=SMARTTOOLS%20AI">${CONTACT}</a></p>`;
+function route(){nav();const h=location.hash.replace('#/','').split('/'),a=$('#app');let html;
+if(h[0]==='tools')html=`<h1>${p(['Outils','Tools'])}</h1><div class="grid">${cards()}</div>`;
+else if(h[0]==='tool')html=toolPage(h[1]);else if(h[0]==='pricing')html=pricing();else if(h[0]==='about')html=about();else if(h[0]==='contact')html=contact();
+else if(legal[h[0]])html=`<h1>${p(legal[h[0]][0])}</h1>`+legal[h[0]][1].map(x=>`<p>${p(x)}</p>`).join('');else html=pageHome();
+a.innerHTML=html;if(h[0]==='tool')bindTool(h[1]);window.scrollTo(0,0)}
+addEventListener('hashchange',route);route();
+</script></body></html>
